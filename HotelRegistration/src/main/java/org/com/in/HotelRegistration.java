@@ -10,17 +10,18 @@ import java.util.*;
 class Hotel {
     String name;
     double regularRate;
-
+   double WeekendRates;
     // Constructor to initialize hotel name and regular rate
-    public Hotel(String name, double regularRate) {
+    public Hotel(String name, double regularRate, double WeekendRates) {
         this.name = name;
         this.regularRate = regularRate;
+        this.WeekendRates=WeekendRates;
     }
 
     // Override toString method to provide a string representation of the hotel
     @Override
     public String toString() {
-        return "Hotel Name: " + name + ", Regular Rate: $" + regularRate;
+        return "Hotel Name: " + name + ", Regular Rate: $" + regularRate + "WeekendRate: $" + WeekendRates ;
     }
 
     // Method to calculate the total cost for a given number of days
@@ -35,9 +36,9 @@ public class HotelRegistration {
         ArrayList<Hotel> hotelsList = new ArrayList<>();
 
         // Hardcoded hotels with their regular rates
-        hotelsList.add(new Hotel("Lakewood", 80));
-        hotelsList.add(new Hotel("Bridgewood", 110.0));
-        hotelsList.add(new Hotel("Ridgewood", 100.0));
+        hotelsList.add(new Hotel("Lakewood", 80 ,90));
+        hotelsList.add(new Hotel("Bridgewood", 110.0 ,60));
+        hotelsList.add(new Hotel("Ridgewood", 100.0,150));
      
 
         // Display hotel information
