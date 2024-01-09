@@ -33,6 +33,11 @@ class Hotel {
     public double getRate(boolean isWeekend) {
         return isWeekend ? WeekendRates : regularRate;
     }
+
+	public int getRating() {
+		
+		return rating;
+	}
 }
 
 public class HotelRegistration {
@@ -44,7 +49,7 @@ public class HotelRegistration {
         hotelsList.add(new Hotel("Lakewood", 110 ,90,3));
         hotelsList.add(new Hotel("Bridgewood", 160.0 ,60,4));
         hotelsList.add(new Hotel("Ridgewood", 220.0,150,5));
-     
+       
 
         // Display hotel information
         System.out.println("Hotel Information:");
@@ -58,7 +63,7 @@ public class HotelRegistration {
         int numDays = scanner.nextInt();}
           
         
-        private static double calculateTotalCost(Hotel hotel, int numDays) {
+        private static double calculateTotalCost(Hotel hotel, int numDays, ArrayList<Hotel> hotelsList) {
             double totalCost = 0;
 
             for (int day = 1; day <= numDays; day++) {
@@ -70,7 +75,7 @@ public class HotelRegistration {
         
 
         // Find the cheapest hotel for the given date range
-        Hotel cheapestHotel = findCheapestHotel(hotelsList, numDays);
+        Hotel cheapestHotel = findCheapestHotel(   hotelsList, int numDays);
 
         // Display the cheap hotels for week days
         System.out.println("The cheapest hotel for regular coustmer on weekdays for the given date range is: " + cheapestHotel.name);
@@ -100,7 +105,22 @@ double minCost=cheapestHotel.calculateTotalCost(numDays);
         // this logic assumes Sunday as the first day of the week. If your week starts from Monday
         
     }
-}
+    
+    
+    private static Hotel findHighestRatedHotels(ArrayList<Hotel> hotelsList , int rating) {
+        int maxRating = 0;
+        Hotel highestRatedHotel = null;
+
+        for (Hotel hotel : hotelsList) {
+            if (hotel.getRating() > maxRating) {
+                maxRating = hotel.getRating();
+                highestRatedHotel = hotel;
+            }
+        }
+
+        return highestRatedHotel;
+    }
+} 
 /*
  private static double calculateTotalCost(Hotel hotel, int numDays) {
         double totalCost = 0;
