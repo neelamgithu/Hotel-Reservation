@@ -11,13 +11,15 @@ class Hotel {
     String name;
     double regularRate;
    double WeekendRates;
+   int rating;
     // Constructor to initialize hotel name and regular rate
-    public Hotel(String name, double regularRate, double WeekendRates) {
+    public Hotel(String name, double regularRate, double WeekendRates, int rating) {
         this.name = name;
         this.regularRate = regularRate;
         this.WeekendRates=WeekendRates;
+        this.rating=rating;
     }
-   
+
     // Override toString method to provide a string representation of the hotel
     @Override
     public String toString() {
@@ -26,28 +28,22 @@ class Hotel {
 
     // Method to calculate the total cost for a given number of days
     public double calculateTotalCost(int numDays) {
-    	 double WeekendRate=WeekendRates*numDays;
-         
-        return regularRate= regularRate* numDays;
-        
-        
+        return regularRate * numDays;
     }
     public double getRate(boolean isWeekend) {
         return isWeekend ? WeekendRates : regularRate;
     }
-
-
-    }
+}
 
 public class HotelRegistration {
-    public static void main(String[] args, Object totalCost) {
+    public static void main(String[] args) {
         // ArrayList to store hotel objects
         ArrayList<Hotel> hotelsList = new ArrayList<>();
 
         // Hardcoded hotels with their regular rates and weekend days rates
-        hotelsList.add(new Hotel("Lakewood", 110 ,90));
-        hotelsList.add(new Hotel("Bridgewood", 160.0 ,60));
-        hotelsList.add(new Hotel("Ridgewood", 220.0,150));
+        hotelsList.add(new Hotel("Lakewood", 110 ,90,3));
+        hotelsList.add(new Hotel("Bridgewood", 160.0 ,60,4));
+        hotelsList.add(new Hotel("Ridgewood", 220.0,150,5));
      
 
         // Display hotel information
@@ -58,16 +54,20 @@ public class HotelRegistration {
 
         // User input for the number of days
         Scanner scanner = new Scanner(System.in);
-//        System.out.print("Enter the number of days for the date range: ");
-//        int numDays = scanner.nextInt();
-//          
+        System.out.print("Enter the number of days for the date range: ");
+        int numDays = scanner.nextInt();}
+          
+        
+        private static double calculateTotalCost(Hotel hotel, int numDays) {
+            double totalCost = 0;
 
-        System.out.print("Enter the start date ");
-        int startdate = scanner.nextInt();
-        System.out.print("Enter the end  date ");
-        int enddate = scanner.nextInt();
-        int numDays= enddate-startdate; 
-       
+            for (int day = 1; day <= numDays; day++) {
+                boolean isWeekend = (day % 7 == 1) || (day % 7 == 7); // Sunday or Saturday
+                totalCost += hotel.getRate(isWeekend);
+            }
+
+            return totalCost;
+        
 
         // Find the cheapest hotel for the given date range
         Hotel cheapestHotel = findCheapestHotel(hotelsList, numDays);
@@ -97,19 +97,9 @@ double minCost=cheapestHotel.calculateTotalCost(numDays);
         }
 
         return cheapestHotel; // Return the cheapest hotel
-       
-    }
-    private static double calculateTotalCost(Hotel hotel, int numDays, double  totalCost) {
-        for (int i=1 ;i< numDays;i++) {
-    
-        	 boolean isWeekend = (i % 7 == 1) || (i % 7 == 7); // this logic assumes Sunday as the first day of the week. If your week starts from Monday
-        	 totalCost += hotel.getRate(isWeekend);
+        // this logic assumes Sunday as the first day of the week. If your week starts from Monday
         
-        }
-        //return totalCost ;
-		return totalCost ;
-        }
-    
+    }
 }
 /*
  private static double calculateTotalCost(Hotel hotel, int numDays) {
@@ -120,4 +110,4 @@ double minCost=cheapestHotel.calculateTotalCost(numDays);
             totalCost += hotel.getRate(isWeekend);
         }
 
-        return ;*/
+        return totalCost;*/
